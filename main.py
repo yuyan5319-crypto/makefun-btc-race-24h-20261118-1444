@@ -4,7 +4,7 @@ Idea: cbBTC on 1-minute bars spends most of its time chopping around a slow
 2-hour mean, with occasional 1-2% air pockets below it and sharp recoveries.
 This bot only buys those air pockets and only sells into strength:
 
-  - Entry: the close prints at least 100 bps below the 120-bar simple moving
+  - Entry: the close prints at least 120 bps below the 120-bar simple moving
     average of closes, and the bot is flat. It spends all its cash (long only,
     one position, no leverage).
   - Exit, whichever comes first:
@@ -38,7 +38,10 @@ WINDOW_BARS = 1440
 # The mean the bot buys dips below: 120 closes, i.e. two hours.
 SMA_BARS = 120
 # Entry: close at least this far below the 120-bar mean, in basis points.
-DIP_BPS = 100
+# 120, not 100: on the dev window the one tradeable air pocket kept deepening
+# after its first 100 bps print, bottoming at 122 bps, so waiting for 120 buys
+# the same dip nearer its bottom (dev net +$20.84 vs +$20.41 at 100).
+DIP_BPS = 120
 # Exit: close this far above the entry's average fill cost, in basis points.
 TAKE_PROFIT_BPS = 220
 # Exit: close this far below the entry's average fill cost, in basis points.
